@@ -1,0 +1,16 @@
+{
+  "name": "types",
+  "type": "module",
+  "imports": {
+    "#types/*": "./src/*"
+  },
+  "exports": {
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  }
+}

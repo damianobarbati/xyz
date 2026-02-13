@@ -1,0 +1,10 @@
+*.db
+**/.env*
+!**/.env.sample
+cache
+lcov.info
+node_modules/
+.idea/
+.vscode/
+.DS_Store
+tsconfig.tsbuildinfo

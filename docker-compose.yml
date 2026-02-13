@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:18.2-alpine
+    platform: linux/amd64
+    container_name: xyz-db
+    restart: unless-stopped
+    cpus: 2 # resource pinning for reproducibility across dev and CI
+    mem_limit: 4g # resource pinning for reproducibility across dev and CI
+    environment:
+      - POSTGRES_HOST=${DATABASE_HOST?}
+      - POSTGRES_DB=${DATABASE_NAME?}
+      - POSTGRES_USER=${DATABASE_USERNAME?}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD?}
+    command: >
+      postgres
+      -c max_connections=800
+      -c log_statement=all
+      -c log_min_duration_statement=0
+      -c log_min_error_statement=ERROR
+      -c jit=off
+      -c random_page_cost=1.1
+      -c effective_cache_size=4GB
+      -c work_mem=64MB
+      -c enable_nestloop=on
+      -c max_parallel_workers=0
+      -c max_parallel_workers_per_gather=0
+      -c max_parallel_maintenance_workers=0
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -h $$POSTGRES_HOST"]
+      start_period: 3s
+      interval: 3s
+      retries: 3
+      timeout: 1s
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql
+
+  cache:
+    image: redis:7.4-alpine
+    container_name: xyz-cache
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=${CACHE_PASSWORD?}
+    command: ["redis-server", "--save", "20 1", "--loglevel", "warning", "--requirepass", "${CACHE_PASSWORD?}"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "REDISCLI_AUTH=${CACHE_PASSWORD?}", "ping"]
+      start_period: 3s
+      interval: 3s
+      retries: 3
+      timeout: 1s
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+
+volumes:
+  cache:
+    driver: local
+  db:
+    driver: local
