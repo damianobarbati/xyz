@@ -1,3 +1,5 @@
+dedupeInjectedDeps: true
 minimumReleaseAge: 1440
+injectWorkspacePackages: true
 packages:
-  - "services/*"
+  - "packages/*"

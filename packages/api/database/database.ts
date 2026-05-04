@@ -1,6 +1,5 @@
 import knex from 'knex';
 import pg from 'pg';
-import Cache from '#api/database/cache.ts';
 import ENV from '#api/env.ts';
 import config from './config.ts';
 
@@ -25,23 +24,6 @@ pg.types.setTypeParser(pg.types.builtins.TIMESTAMPTZ, parsePostgresDate);
 
 const database = knex(config);
 export default database;
-
-// custom hook on queries to invalidate the cache containing a modified object
-database.on('query-response', (_, obj) => {
-  // get the query method: we can't use obj.method because it returns "raw" for database.raw queries
-  const method = obj.sql.split(' ')[0].toLowerCase();
-  if (!['insert', 'update', 'delete'].includes(method)) return;
-
-  // get table name: remember to always use returning * in all mutation queries!
-  const table = obj.sql.match(/(?:insert|update|delete)\s*(?:into|from)?\s*"?(.+?)"?\s/)[1];
-
-  // get mutated rows
-  const ids = obj.response.rows.map((row) => row.id).filter(Boolean);
-  if (!ids.length) return;
-
-  // invalidate cache involving mutated rows
-  void Cache.queue.enqueue(() => Cache.uncacheQuery(table));
-});
 
 const SLOW_QUERY_THRESHOLD = 2_000; // 2s
 const SLOW_QUERY_IGNORE_PATTERNS = [/no-log/, /^select count/, /final_shipments/];

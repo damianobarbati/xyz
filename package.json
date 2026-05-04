@@ -5,10 +5,10 @@
   "author": "Damiano Barbati <damiano.barbati@gmail.com> (https://github.com/damianobarbati)",
   "repository": "https://github.com/damianobarbati/xyz",
   "description": "Prototype repository for JS applications.",
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=25.6",
-    "pnpm": ">=10.28"
+    "node": ">=24.14",
+    "pnpm": ">=10.33"
   },
   "type": "module",
   "scripts": {
@@ -19,9 +19,9 @@
     "env:down": "docker-compose down --volumes --remove-orphans"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.7",
-    "@types/node": "^25.5.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.1.0"
+    "@biomejs/biome": "^2.4.14",
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
   }
 }

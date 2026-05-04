@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
+import ENV from '#api/env.ts';
 import logger from '#api/logger.ts';
-import ENV from '../env.ts'; // js extension needed due to knex machinery
 
 const debugFn = logger('xyz:db');
 

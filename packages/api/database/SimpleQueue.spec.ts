@@ -1,6 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
 import { describe, expect, it } from 'vitest';
-import SimpleQueue from '#api/database/SimpleQueue.ts';
+import SimpleQueue from '#api-database/SimpleQueue.ts';
 
 describe('SimpleQueue', () => {
   const queue = new SimpleQueue();

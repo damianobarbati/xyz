@@ -15,7 +15,6 @@ This is a prototype repository featuring:
 
 Dependencies:
 - `fnm` (eg: `brew install fnm`)
-- `pnpm` (eg: `npm install -g pnpm`)
 - add `eval "$(fnm env --use-on-cd)"` into your `~/.zprofile` or `~/.profile`
 
 Setup:
@@ -30,7 +29,6 @@ pnpm env:down # remove docker containers
 pnpm env:up # start docker containers
 pnpm -F api db:migrate # run migrations
 pnpm -F api db:seed # seed db
-pnpm -F api start # start app
 ```
 
 Run:
@@ -41,13 +39,13 @@ pnpm -F webapp build:dev
 
 Testing:
 ```sh
-pnpm test # test
+pnpm test
 ```
 
-Linting:
+Linting and typechecking:
 ```sh
-pnpm lint # lint
-pnpm tsc # typecheck
+pnpm lint
+pnpm tsc
 ```
 
 To run with https locally:
