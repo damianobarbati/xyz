@@ -1,10 +1,11 @@
-*.db
 **/.env*
 !**/.env.sample
-cache
-lcov.info
-node_modules/
+**/node_modules/
+**/dist/
+**/coverage/
+**/stats.html
+
+tsconfig.tsbuildinfo
 .idea/
 .vscode/
 .DS_Store
-tsconfig.tsbuildinfo

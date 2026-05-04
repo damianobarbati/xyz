@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "type": "module",
+  "imports": {
+    "#api/*": "./src/*",
+    "#api-database/*": "./database/*"
+  },
+  "scripts": {
+    "test": "vitest run --reporter=default --reporter=junit --outputFile=/tmp/junit.xml --coverage",
+    "start:dev": "NODE_ENV=development DEBUG=${DEBUG:-'xyz:*'} NODE_OPTIONS='--no-warnings --enable-source-maps --import=amaro/transform' node --env-file-if-exists=../../.env --watch ./src/index.ts",
+    "start": "NODE_ENV=production DEBUG=${DEBUG:-'xyz:*'} NODE_OPTIONS='--no-warnings --enable-source-maps --import=amaro/transform' node ./src/index.ts",
+    "db:migrate:make": "NODE_ENV=development NODE_OPTIONS='--no-warnings --enable-source-maps --import=amaro/transform' knex migrate:make --knexfile=./database/config.ts",
+    "db:migrate": "NODE_ENV=development NODE_OPTIONS='--no-warnings --enable-source-maps --import=amaro/transform' knex migrate:latest --knexfile=./database/config.ts",
+    "db:seed:make": "NODE_ENV=development NODE_OPTIONS='--no-warnings --enable-source-maps --import=amaro/transform' knex seed:make --knexfile=./database/config.ts",
+    "db:seed": "NODE_ENV=development DEBUG='atlas:seed' NODE_OPTIONS='--no-warnings --enable-source-maps --import=amaro/transform' knex seed:run --knexfile=./database/config.ts"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.5.0",
+    "@hono/node-server": "^2.1.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "debug": "^4.4.3",
+    "hono": "^4.13.0",
+    "ioredis": "^6.0.0",
+    "knex": "^3.3.0",
+    "pg": "^8.22.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "types": "workspace:^"
+  }
+}

@@ -4,6 +4,7 @@
     "module": "nodenext",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
+    "types": ["node"],
     "allowJs": true,
     "allowImportingTsExtensions": true,
     "skipLibCheck": true,
@@ -18,7 +19,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
     "erasableSyntaxOnly": true
   }
 }

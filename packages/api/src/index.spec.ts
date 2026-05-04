@@ -1,5 +1,4 @@
-import assert from 'node:assert/strict';
-import { describe, it } from 'node:test';
+import { describe, expect, it } from 'vitest';
 import { app } from './index.ts';
 
 describe('Router', () => {
@@ -7,12 +6,12 @@ describe('Router', () => {
     it('should succeed', async () => {
       const response = await app.request('/healthcheck', { method: 'GET' });
       const body = await response.json();
-      assert.deepEqual(body, true);
+      expect(body).toEqual(true);
     });
 
     it('should fail with 404', async () => {
       const response = await app.request('/healthcheck', { method: 'POST' });
-      assert.equal(response.status, 404);
+      expect(response.status).toEqual(404);
     });
   });
 
@@ -24,10 +23,10 @@ describe('Router', () => {
         method: 'POST',
         body: JSON.stringify(payload),
       });
-      assert.equal(response.status, 200);
+      expect(response.status).toEqual(200);
 
       const body = await response.json();
-      assert.deepEqual(body, payload);
+      expect(body).toEqual(payload);
     });
   });
 });
