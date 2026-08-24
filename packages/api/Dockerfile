@@ -1,25 +1,32 @@
-FROM node:24.14-alpine AS base
+FROM node:26.7-alpine AS base
 
 ENV NODE_ENV=production
 ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 ARG APP_BUILD
 ENV APP_BUILD=$APP_BUILD
 
+RUN npm install -g corepack && corepack enable
 WORKDIR /mnt
-COPY ./package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json ./
-COPY services/api ./services/api
-# COPY services/types ./services/types
-# COPY services/common ./services/common
-# COPY services/blockchain ./services/blockchain
 
-RUN apk add --no-cache --update --upgrade --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community pnpm dumb-init
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --prefer-offline --prod
+FROM base AS builder
+COPY . .
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --silent --frozen-lockfile --prefer-offline
+RUN pnpm -F api --prod deploy /out
 
-RUN chown -R node:node /usr/bin/pnpm
-RUN chown -R node:node ./services/api/src/docs
-RUN chown -R node:node ./services/api/src/hotfix.ts # special file "node" user can edit and run on emergency
+FROM node:26.7-alpine AS runtime
+ENV NODE_ENV=production
+RUN apk add --no-cache dumb-init
+
+WORKDIR /mnt
+COPY --from=builder /out ./
+COPY ./pnpm-workspace.yaml ./pnpm-workspace.yaml
+# RUN chown -R node:node ./packages/api/src/hotfix.ts
 
 USER node
-CMD dumb-init pnpm -F api start
+EXPOSE 8080
+
+CMD ["/usr/bin/dumb-init", "--", "npm", "run", "start"]

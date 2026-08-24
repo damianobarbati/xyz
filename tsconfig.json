@@ -1,24 +1,16 @@
 {
   "compilerOptions": {
-    "moduleResolution": "NodeNext",
     "module": "nodenext",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
-    "types": ["node"],
+    "lib": ["dom", "esnext"],
     "allowJs": true,
     "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "noImplicitAny": false,
-    "noUnusedLocals": false,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "strictPropertyInitialization": false,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
     "erasableSyntaxOnly": true
   }
 }
