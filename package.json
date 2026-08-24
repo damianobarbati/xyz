@@ -15,8 +15,8 @@
     "postinstall": "pnpm audit --audit-level critical",
     "lint": "biome check --write",
     "tsc": "tsc",
-    "env:up": "docker-compose up -d --wait --quiet-pull --remove-orphans",
-    "env:down": "docker-compose down --volumes --remove-orphans"
+    "env:up": "docker compose up -d --wait --quiet-pull --remove-orphans",
+    "env:down": "docker compose down --volumes --remove-orphans"
   },
   "dependencies": {
     "amaro": "^1.1.11"
