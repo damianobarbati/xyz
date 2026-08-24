@@ -1,6 +1,6 @@
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
-const password_hash = 'password';
+const password_hash = "password";
 
 type UserCreateRequest = any;
 type UserRowInsert = any;

@@ -1,4 +1,4 @@
-import asyncStorage from '#api/asyncStorage.ts';
+import asyncStorage from "#api/asyncStorage.ts";
 
 export const getUserFromAsyncStorage = () => asyncStorage.getStore()?.user;
 

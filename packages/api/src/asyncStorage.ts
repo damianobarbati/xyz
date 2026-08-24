@@ -1,5 +1,5 @@
-import { AsyncLocalStorage } from 'node:async_hooks';
-import type { UserRow } from 'types/User.ts';
+import { AsyncLocalStorage } from "node:async_hooks";
+import type { UserRow } from "types/User.ts";
 
 export type Store = {
   user: undefined | UserRow;

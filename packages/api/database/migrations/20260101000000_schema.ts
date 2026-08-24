@@ -4,11 +4,11 @@
  * TRUNCATE TABLE knex_migrations;
  * INSERT INTO knex_migrations (name, batch, migration_time) VALUES ('20260101000000_schema.ts', 1, NOW());
  */
-import fsp from 'node:fs/promises';
-import type { Knex } from 'knex';
+import fsp from "node:fs/promises";
+import type { Knex } from "knex";
 
-const schema = await fsp.readFile('../database/schema.sql', 'utf-8');
-const views = await fsp.readFile('../database/views.sql', 'utf-8');
+const schema = await fsp.readFile("../database/schema.sql", "utf-8");
+const views = await fsp.readFile("../database/views.sql", "utf-8");
 
 export const up = async (database: Knex) => {
   await database.raw(schema);

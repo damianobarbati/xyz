@@ -8,7 +8,7 @@ This is a prototype repository featuring:
 - Hono
 - Zod
 - Biome
-- native subpath imports via package.json `imports` field (eg. `import Foe from '#src/foe.ts'`, no TypeScript `paths` or `baseUrl`)
+- native subpath imports via package.json `imports` field (e.g. `import Foe from '#src/foe.ts'`, no TypeScript `paths` or `baseUrl`)
 - cross-package monorepo imports via package.json `exports` field and `workspace:*` dependency (eg. `import Foe from 'foe/bar.ts'`)
 
 ## Requirements:
@@ -33,12 +33,12 @@ pnpm -F api db:seed # seed db
 
 Run:
 ```sh
-pnpm -F api start
+pnpm -F api start:dev
 ```
 
 Testing:
 ```sh
-pnpm test
+pnpm -F api test
 ```
 
 Linting and typechecking:

@@ -1,14 +1,14 @@
-import type { Knex } from 'knex';
-import ENV from '#api/env.ts';
-import logger from '#api/logger.ts';
+import type { Knex } from "knex";
+import ENV from "#api/env.ts";
+import logger from "#api/logger.ts";
 
-const debugFn = logger('xyz:db');
+const debugFn = logger("xyz:db");
 
 const config: Knex.Config = {
-  client: 'pg',
+  client: "pg",
   connection: {
     connectionString: ENV.DB_URI,
-    ssl: ENV.APP_ENV === 'local' ? undefined : { rejectUnauthorized: false },
+    ssl: ENV.APP_ENV === "local" ? undefined : { rejectUnauthorized: false },
   },
   pool: {
     // max = max db connections / number of replicas
@@ -19,24 +19,24 @@ const config: Knex.Config = {
     propagateCreateError: false,
   },
   acquireConnectionTimeout: 5_000,
-  debug: ENV.DEBUG.includes('db'),
+  debug: ENV.DEBUG.includes("db"),
   asyncStackTraces: true, // ref: https://knexjs.org/guide/#asyncstacktraces
   log: {
     debug: ({ sql, bindings }) => {
-      if (!sql || sql.includes('no-log')) return;
+      if (!sql || sql.includes("no-log")) return;
       if (debugFn.enabled) console.log(`[QUERY] ${sql}`, bindings);
       else debugFn(`[QUERY] ${sql}`, bindings);
     },
   },
   migrations: {
-    stub: './migration.stub.ts',
-    tableName: 'knex_migrations',
-    directory: './migrations',
-    loadExtensions: ['.ts'],
+    stub: "./migration.stub.ts",
+    tableName: "knex_migrations",
+    directory: "./migrations",
+    loadExtensions: [".ts"],
   },
   seeds: {
-    directory: './seeds',
-    loadExtensions: ['.ts'],
+    directory: "./seeds",
+    loadExtensions: [".ts"],
   },
 };
 

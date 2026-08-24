@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+    tags: ['*']
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  # secrets
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+  # vars
+  VITE_APP_ENV: ${{ vars.VITE_APP_ENV }}
+
+jobs:
+  test:
+    timeout-minutes: 5
+    runs-on: ubuntu-24.04
+    environment: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v5
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: 'package.json'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --silent --frozen-lockfile --prefer-offline --prod=false
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm tsc
+
+      - name: Setup envs
+        run: cp .env.sample .env
+
+      - name: Start testing environment
+        run: |
+          export $(grep -v '^#' .env | xargs)
+          pnpm env:up
+          timeout 10 bash -c -- "while ! docker run --rm --network=host -i postgres:18-alpine pg_isready --quiet --timeout=1 -d ${DB_URI:?}; do sleep 1; done"
+          pnpm -F api db:migrate
+
+      - name: Test package "api"
+        run: pnpm -F api test
+
+  build-and-deploy:
+    timeout-minutes: 5
+    runs-on: ubuntu-24.04
+    environment: ${{ startsWith(github.ref, 'refs/tags/') && 'production' || 'test' }}
+    needs: [test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Build image "api"
+        run: DOCKER_BUILDKIT=1 docker build --quiet --rm --force-rm -t api -f ./packages/api/Dockerfile .
+
+      - name: Dockerhub login
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: docker/login-action@v4
+        with:
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ env.DOCKERHUB_PASSWORD }}
+
+      - name: Push image "api"
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          docker tag api $DOCKERHUB_USERNAME/xyz-api
+          docker push $DOCKERHUB_USERNAME/xyz-api
+
+      - name: Push image "webapp"
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          docker tag webapp $DOCKERHUB_USERNAME/xyz-webapp
+          docker push $DOCKERHUB_USERNAME/xyz-webapp
+

@@ -4,11 +4,11 @@
   "license": "MIT",
   "author": "Damiano Barbati <damiano.barbati@gmail.com> (https://github.com/damianobarbati)",
   "repository": "https://github.com/damianobarbati/xyz",
-  "description": "Prototype repository for JS applications.",
-  "packageManager": "pnpm@10.22.0",
+  "description": "Prototype repository for Typescript-first and ESM-first monorepo applications.",
+  "packageManager": "pnpm@11.23.0",
   "engines": {
-    "node": ">=24.14",
-    "pnpm": ">=10.22"
+    "pnpm": ">=11.23",
+    "node": ">=26.7"
   },
   "type": "module",
   "scripts": {
@@ -22,8 +22,9 @@
     "amaro": "^1.1.11"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.7",
+    "@biomejs/biome": "^2.5.8",
     "@types/node": "^26.1.2",
+    "@vitest/coverage-v8": "^4.1.10",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   }
