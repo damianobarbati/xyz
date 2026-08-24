@@ -1,0 +1,11 @@
+**/.env*
+!**/.env.sample
+**/node_modules
+**/dist
+**/coverage
+**/stats.html
+
+.git
+.idea
+.vscode
+.DS_Store
