@@ -1,0 +1,32 @@
+@import "./default.css";
+@import "@fontsource-variable/geist/index.css";
+
+@theme {
+  --font-display: "Geist Variable";
+  --font-size: 16px;
+  --font-weight: 450;
+  --line-height: 1.6;
+  --letter-spacing: 0em;
+  --fade-duration: 0.5s;
+  --color-app-text: var(--color-gray-950);
+  --color-app-textlight: var(--color-slate-500);
+  --color-app-primary: var(--color-gray-900);
+  --color-app-bg: var(--color-gray-50);
+  --color-app-surface: var(--color-gray-50);
+  --color-app-border: var(--color-gray-200);
+  --color-app-link: var(--color-blue-600);
+  --color-app-link-hover: var(--color-blue-500);
+}
+
+@layer base {
+  :root.dark {
+    --color-app-text: #f4f4f5;
+    --color-app-textlight: #a1a1aa;
+    --color-app-primary: #3b82f6;
+    --color-app-bg: #050505;
+    --color-app-surface: #121214;
+    --color-app-border: #27272a;
+    --color-app-link: #60a5fa;
+    --color-app-link-hover: #93c5fd;
+  }
+}

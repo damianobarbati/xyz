@@ -5,9 +5,9 @@
   "author": "Damiano Barbati <damiano.barbati@gmail.com> (https://github.com/damianobarbati)",
   "repository": "https://github.com/damianobarbati/xyz",
   "description": "Prototype repository for Typescript-first and ESM-first monorepo applications.",
-  "packageManager": "pnpm@11.23.0",
+  "packageManager": "pnpm@11.24.0",
   "engines": {
-    "pnpm": ">=11.23",
+    "pnpm": ">=11.24",
     "node": ">=26.7"
   },
   "type": "module",

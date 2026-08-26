@@ -34,11 +34,12 @@ pnpm -F api db:seed # seed db
 Run:
 ```sh
 pnpm -F api start:dev
+pnpm -F webapp build:dev
 ```
 
 Testing:
 ```sh
-pnpm -F api test
+pnpm -r test
 ```
 
 Linting and typechecking:

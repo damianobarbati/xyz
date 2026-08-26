@@ -11,6 +11,8 @@
     "noImplicitAny": false,
     "isolatedModules": true,
     "jsx": "preserve",
-    "erasableSyntaxOnly": true
+    "erasableSyntaxOnly": true,
+    "incremental": false,
+    "composite": false
   }
 }
