@@ -1,15 +1,15 @@
 # xyz
 
 This is a prototype repository featuring:
-- pnpm monorepo
-- Typescript (native)
-- ESM (native)
-- Vitest
+- PNPM monorepo
+- Typescript first (native)
+- ESM first (native)
 - Hono
 - Zod
+- Vitest
 - Biome
-- native subpath imports via package.json `imports` field (e.g. `import Foe from '#src/foe.ts'`, no TypeScript `paths` or `baseUrl`)
-- cross-package monorepo imports via package.json `exports` field and `workspace:*` dependency (eg. `import Foe from 'foe/bar.ts'`)
+- native subpath imports via `imports` field (e.g. `import Foe from '#src/foe.ts'`)
+- cross-package monorepo imports via `exports` field and `workspace:*` dependency (e.g. `import Foe from 'foe/bar.ts'`)
 
 ## Requirements:
 
