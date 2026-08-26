@@ -24,6 +24,26 @@ Each component must:
 - Avoid inline `style` properties unless dynamically computed.
 - Avoid CSS-in-JS solutions.
 
+## UX
+UX must be provided as a Figma board.
+
+Figma board must include the UI kit with:
+- Typography.
+- Icon set from react-icons.
+- Buttons with possible statuses and interactions.
+- Inputs with possible statuses and interactions, declined by type (eg: text, number, date, currency).
+- Snackbar for quick visual feedback on actions, such as success, warning or error.
+- Confirmation prompts for quick yes/no input from the user.
+- Table with the search bar and available filters.
+
+Figma board must be composed using the UI kit.  
+Figma board must provide each view for the following resolutions:
+- Desktop: 1280 x 700
+- Tablet: 768x1024
+- Smartphone: 390x844
+
+UI must respect responsive design principles, which means that as the viewport shrinks the elements can either and only be stacked or be hidden: the DOM structure of the HTML document do not change between resolutions and/or users.
+
 ## Application state
 - Use `zustand` to manage application/domain state with plain objects.
 - Do not use React Context for global state (scoped compound UI components excepted).
