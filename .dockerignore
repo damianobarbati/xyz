@@ -1,0 +1,13 @@
+.git
+**/*.env
+
+**/node_modules
+**/coverage
+**/dist
+
+.idea/
+.vscode/
+.DS_Store
+
+**/.report-*
+/packages/web/public/env.json

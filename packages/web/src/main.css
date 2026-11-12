@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply h-dvh w-full;
+  }
+
+  #root {
+    @apply size-full;
+  }
+}
+
+@layer components {
+  .auth-input {
+    @apply mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200;
+  }
+  .auth-button {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 font-medium text-white hover:bg-slate-700 disabled:cursor-wait disabled:opacity-60;
+  }
+  .auth-spinner {
+    @apply inline-block size-8 animate-spin rounded-full border-4 border-current border-r-transparent;
+  }
+}

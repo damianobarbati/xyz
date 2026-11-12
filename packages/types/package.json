@@ -1,0 +1,13 @@
+{
+  "name": "types",
+  "type": "module",
+  "imports": {
+    "#types/*": "./src/*"
+  },
+  "exports": {
+    "./*": "./src/*"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

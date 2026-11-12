@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 64">
+  <title>QVAC</title>
+  <rect width="248" height="64" rx="12" fill="#082f2c" />
+  <g fill="#16e3c1">
+    <path fill-rule="evenodd" d="M16 13h28l8 9v20l7 9H16L8 42V22Zm5 11-3 4v9l3 3h18l-7-8h10v-4l-3-4Z" />
+    <path d="M66 13h12l12 26 12-26h12L96 51H84Z" />
+    <path fill-rule="evenodd" d="m137 13-19 38h12l4-8h20l4 8h12l-19-38Zm7 10 6 11h-12Z" />
+    <path d="m188 13-9 9v20l9 9h43V40h-37l-4-4v-8l4-4h37V13Z" />
+  </g>
+</svg>

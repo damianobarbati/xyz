@@ -1,0 +1,33 @@
+{
+  "name": "xyz",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Damiano Barbati <damiano.barbati@gmail.com> (https://github.com/damianobarbati)",
+  "repository": "https://github.com/damianobarbati/xyz",
+  "description": "Prototype repository for web applications.",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=26.7",
+    "pnpm": ">=12.18"
+  },
+  "type": "module",
+  "scripts": {
+    "postinstall": "pnpm audit --audit-level critical",
+    "oxlint": "oxlint --fix",
+    "biome": "biome check --write --unsafe",
+    "tsc": "tsc",
+    "lint": "pnpm oxlint && pnpm biome && pnpm tsc",
+    "env:down": "docker compose down --volumes --remove-orphans",
+    "env:up": "docker compose up -d --wait --quiet-pull --remove-orphans",
+    "predev": "for port in 8080 3000; do lsof -ti :$port | xargs kill -9 2>/dev/null || true; done",
+    "dev": "pnpm -r --parallel run dev"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.6",
+    "@types/node": "^26.6.6",
+    "oxlint": "^1.93.0",
+    "oxlint-anti-slop": "^0.4.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}

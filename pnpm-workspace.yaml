@@ -1,0 +1,5 @@
+packages:
+  - "packages/*"
+dangerouslyAllowAllBuilds: true
+dedupeInjectedDeps: true
+injectWorkspacePackages: true

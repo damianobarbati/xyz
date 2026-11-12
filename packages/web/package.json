@@ -1,0 +1,39 @@
+{
+  "name": "web",
+  "type": "module",
+  "imports": {
+    "#web/*": "./src/*"
+  },
+  "scripts": {
+    "predev": "node ./src/env.ts",
+    "dev": "vite dev --logLevel error",
+    "build": "vite build",
+    "prestart": "node ./src/env.ts",
+    "start": "serve --no-request-logging -p 3000 ./dist",
+    "test": "node --test env.test.ts"
+  },
+  "dependencies": {
+    "serve": "^14.2.7",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.1.0",
+    "@rolldown/plugin-babel": "^0.3.1",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.14",
+    "@vitejs/plugin-react": "^6.3.0",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "ofetch": "^1.5.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "^7.92.0",
+    "rollup-plugin-visualizer": "^7.1.2",
+    "swr": "^2.4.1",
+    "tailwindcss": "^4.3.5",
+    "types": "workspace:*",
+    "vite": "^8.3.8",
+    "vite-plugin-compression2": "^2.5.4",
+    "wouter": "^3.7.1"
+  }
+}

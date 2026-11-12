@@ -1,0 +1,23 @@
+{
+  "lighthouse": {
+    "options": {
+      "port": 9222,
+      "skipAudits": ["llms-txt", "ard-schema", "robots-txt"]
+    },
+    "categories": ["performance", "accessibility", "best-practices", "seo"],
+    "minScore": 0.95,
+    "maxJavaScriptBytes": 150000
+  },
+  "load": {
+    "register": {
+      "endpoint": "/auth/register",
+      "minRequestsPerSecond": 10,
+      "maxP99Ms": 2000
+    },
+    "chat": {
+      "endpoint": "/chat/send",
+      "minRequestsPerSecond": 10,
+      "maxP99Ms": 500
+    }
+  }
+}
