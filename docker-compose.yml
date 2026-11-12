@@ -20,27 +20,7 @@ services:
     image: redis:8-alpine
     container_name: redis
     restart: unless-stopped
-    command:
-      [
-        "redis-server",
-        "--user",
-        "default",
-        "off",
-        "--user",
-        "user",
-        "on",
-        ">password",
-        "~*",
-        "+@all",
-        "--save",
-        "",
-        "--appendonly",
-        "no",
-        "--maxmemory-policy",
-        "noeviction",
-        "--loglevel",
-        "warning",
-      ]
+    command: redis-server --user default off --user user on ">password" "~*" "+@all" --save "" --appendonly no --maxmemory-policy noeviction --loglevel warning
     ports:
       - "6379:6379"
     healthcheck:
